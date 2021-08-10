@@ -2,19 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {//child class to Board parent class
-  render() { //we have passed two props from Board to Square, value and onClick
+  function Square(props){
     return (
-      <button className="square"  
-        onClick={ ()=> this.props.onClick()} //When button clicked, React will call onClick event handler that is defined in Squares render() method
-                                            //This event handler calls this.props.onClick(). The Square's onClick prop was specified by the Board.
-                                        //Since the Board passed onClick={()=>this.handleClick(i)} to Square, the Square calls this.handleClick(i) when clicked
-      >
-        {this.props.value} 
+      <button className="square" onClick={props.onClick}>
+        {props.value} 
       </button>
     );
   }
-}
 
 class Board extends React.Component {//parent class to Square
   constructor(props){
