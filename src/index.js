@@ -2,26 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-  function Square(props){
-    return (
-      <button className="square" onClick={props.onClick}>
-        {props.value} 
-      </button>
-    );
-  }
-
-class Board extends React.Component {//parent class to Square
+function Square(props){
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value} 
+    </button>
+  );
+}
+class Board extends React.Component {//parent class
   constructor(props){
     super(props);
-    this.state={ //sets Boards initials state to contain array of 9 nulls correspononding to the 9 squares
-      squares: Array(9).fill(null), 
+    this.state={
+      squares: Array(9).fill(null), //sets Boards initials state to contain array of 9 nulls correspononding to the 9 squares
+      xIsNext: true, //sets X to be default letter played at start of game
     };
   }
 
   handleClick(i) {
     const squares = this.state.squares.slice(); //creates copy of squares to modify instead of modifying existing array
-    squares[i] = 'X';
-    this.setState({squares: squares});
+    squares[i] = this.state.xIsNext ? 'X' : 'O'; //if value of xIsNext === true, then return 'X', else return 'O'
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext, //flips value of xIsNext to false
+    });
   }
 
   renderSquare(i) {
